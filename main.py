@@ -1,6 +1,5 @@
 import difflib
 import argparse
-from math import sqrt
 import jieba
 import os
 
@@ -39,29 +38,6 @@ def compute_similarity(file1, file2):
 
     # Return similarity rounded to two decimal places
     return round(similarity_ratio, 2)
-
-
-def similarity_with_2_sents(file1, file2):
-    inner_product = 0
-    square_length_vec1 = 0
-    square_length_vec2 = 0
-
-    content1 = read_file(file1)
-    content2 = read_file(file2)
-    if content1 is None or content2 is None:
-        return None
-
-    # Tokenize file content using jieba
-    words1 = list(jieba.cut(content1))
-    words2 = list(jieba.cut(content2))
-
-    for tup1, tup2 in zip(words1, words2):
-        inner_product += tup1[1]*tup2[1]
-        square_length_vec1 += tup1[1]**2
-        square_length_vec2 += tup2[1]**2
-
-    return (inner_product/sqrt(square_length_vec1*square_length_vec2))
-
 
 if __name__ == '__main__':
 
